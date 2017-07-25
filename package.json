@@ -4,6 +4,7 @@
     "description": "Switch BOM in text document.",
     "version": "0.0.1",
     "publisher": "wraith13",
+    "license": "SEE LICENSE IN LICENSE_1_0.txt",
     "engines": {
         "vscode": "^1.14.0"
     },
