@@ -8,6 +8,14 @@
     "engines": {
         "vscode": "^1.14.0"
     },
+    "bugs": {
+        "url": "https://github.com/wraith13/bom-switcher-vscode/issues"
+    },
+    "homepage": "https://github.com/wraith13/bom-switcher-vscode/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wraith13/bom-switcher-vscode.git"
+    },
     "categories": [
         "Other"
     ],
