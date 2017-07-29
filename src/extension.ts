@@ -43,7 +43,14 @@ export module bomswitcher
         (
             vscode.commands.registerCommand
             (
-                'bom-switcher.update', update
+                'bom-switcher.attachBOM', attachBOM
+            )
+        );
+        context.subscriptions.push
+        (
+            vscode.commands.registerCommand
+            (
+                'bom-switcher.detachBOM', detachBOM
             )
         );
         vscode.workspace.onDidChangeTextDocument
@@ -56,20 +63,41 @@ export module bomswitcher
         update();
     }
 
+    function isWithBOM(document : vscode.TextDocument) : boolean
+    {
+        return "\u00A0" === document.getText(new vscode.Range(new vscode.Position(0, 0),new vscode.Position(0, 1)));
+    }
     export async function update() : Promise<void>
     {
         const document =  WorkSpace.getActiveDocument();
         if (document)
         {
-            const first = document.getText(new vscode.Range(new vscode.Position(0, 0),new vscode.Position(0, 1)));
-            indicator.text = "\u00A0" === first ? "💣": "🌀";
+            if (isWithBOM(document))
+            {
+                indicator.text = "💣";
+                indicator.command = 'bom-switcher.detachBOM';
+            }
+            else
+            {
+                indicator.text = "🌀";
+                indicator.command = 'bom-switcher.attachBOM';
+            }
         }
         else
         {
             indicator.text = "🚧";
             //indicator.color = color;
+            indicator.command = undefined;
         }
         indicator.show();
+    }
+    export async function attachBOM() : Promise<void>
+    {
+        vscode.window.showInformationMessage("'attachBOM' is called. ( But, this command does nothing. )");
+    }
+    export async function detachBOM() : Promise<void>
+    {
+        vscode.window.showInformationMessage("`detachBOM' is called. ( But, this command does nothing. )");
     }
 }
 
